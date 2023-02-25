@@ -14,7 +14,7 @@ import SendIcon from './img/icon/send.svg'
 import ShareIcon from './img/icon/share_icon.svg'
 import UserIcon from './img/icon/user_icon.svg'
 
-const SLIconSource = {
+const RTIconSource = {
   AlertIcon,
   BadgeIcon,
   CheckCircleIcon,
@@ -32,4 +32,4 @@ const SLIconSource = {
   UserIcon,
 }
 
-export default SLIconSource
+export default RTIconSource

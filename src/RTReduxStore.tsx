@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { modalReducer } from './ui/state_slices/modalState'
 import { toastReducer } from './ui/state_slices/toastState'
 
-export const SLStateStore = configureStore({
+export const RTStateStore = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({ serializableCheck: false }),
   reducer: {
@@ -11,4 +11,4 @@ export const SLStateStore = configureStore({
   },
 })
 
-export type SLState = ReturnType<typeof SLStateStore.getState>;
+export type RTState = ReturnType<typeof RTStateStore.getState>;

@@ -2,7 +2,8 @@ import UIKeyboardInput, { INPUT_TYPE } from './UIKeyboardInput'
 import UIKeyboardSelect, { UISelectOptionContent } from './UIKeyboardSelect'
 import { useCallback, useState } from 'react'
 
-import SLIconSource from '../assets/SLIconSource'
+import LogUtil from '../utils/LogUtil'
+import RTIconSource from '../assets/RTIconSource'
 import UIButton from './UIButton'
 import UICard from './UICard'
 import UIFileUploader from './UIFileUploader'
@@ -142,7 +143,7 @@ function Demo() {
 
       <UIFlexBox style={{ height: '100px' }}>
         <UIText>
-          This is an image <UIImage src={SLIconSource.LogoPlaceholder} /> that will never
+          This is an image <UIImage src={RTIconSource.LogoPlaceholder} /> that will never
           exceed the container and always show all the contents.
         </UIText>
       </UIFlexBox>
@@ -152,7 +153,7 @@ function Demo() {
           This is an image{' '}
 
           <UIImage
-            src={SLIconSource.LogoPlaceholder}
+            src={RTIconSource.LogoPlaceholder}
             fillWithCropFocus='center'
             height='50px'
             width='200px'/>{' '}
@@ -170,17 +171,17 @@ function Demo() {
         }}>
         <UICard style={{ height: '100%' }}>
           <UIFlexBox style={{ height: '100%', width: '100%' }}>
-            <UIImage src={SLIconSource.LogoPlaceholder} variant='round' />
+            <UIImage src={RTIconSource.LogoPlaceholder} variant='round' />
             <UILineSeparator direction='vertical' />
-            <UIImage src={SLIconSource.LogoPlaceholder} variant='square' />
+            <UIImage src={RTIconSource.LogoPlaceholder} variant='square' />
           </UIFlexBox>
         </UICard>
 
         <UICard style={{ height: '100%' }}>
           <UIFlexBox style={{ height: '100%', width: '100%' }}>
-            <UIImage src={SLIconSource.LogoPlaceholder} variant='round' />
+            <UIImage src={RTIconSource.LogoPlaceholder} variant='round' />
             <UILineSeparator direction='vertical' />
-            <UIImage src={SLIconSource.LogoPlaceholder} variant='square' />
+            <UIImage src={RTIconSource.LogoPlaceholder} variant='square' />
           </UIFlexBox>
         </UICard>
       </UIFlexBox>
@@ -233,7 +234,7 @@ function Demo() {
           type={INPUT_TYPE.TEXT}
           name=''
           isRequired
-          icon={SLIconSource.EmailIcon}
+          icon={RTIconSource.EmailIcon}
           isMulti
           variant='primary'/>
       </UIFlexBox>
@@ -252,7 +253,7 @@ function Demo() {
         <UIButton
           text='success'
           onClick={() => {
-            toast('Profile Updated Successfully', 'success', 2000, 'Yeah')
+            toast('This is a success toast message!', 'success', 2000, 'Yeah')
           }}/>
 
         <UILineSeparator direction='vertical' />
@@ -260,7 +261,7 @@ function Demo() {
         <UIButton
           text='error'
           onClick={() => {
-            toast('Pairing Failed', 'error', null, 'Oh')
+            toast('This is an error toast message!', 'error', null, 'Oh')
           }}/>
 
         <UILineSeparator direction='vertical' />
@@ -269,7 +270,7 @@ function Demo() {
           text='info'
           onClick={() => {
             toast(
-              "You've used up your pairing opportunities! Come and check next month:)",
+              "This is an info toast message!",
               'info',
               2000,
               'OK'
@@ -374,7 +375,7 @@ function DemoUiGridHorizontal() {
           </div>,
         ])
         if (Math.random() > 0.5) {
-          console.log('Horizontal no more data!')
+          LogUtil.verbose('Horizontal no more data!')
           setAllDataFetched(true)
         }
         refreshDone()

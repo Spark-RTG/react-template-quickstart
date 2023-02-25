@@ -6,8 +6,8 @@ import {
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { useEffect, useState } from "react";
 
-import SLIconSource from "../assets/SLIconSource";
-import { SLState } from "../SLReduxStore";
+import RTIconSource from "../assets/RTIconSource";
+import { RTState } from "../RTReduxStore";
 import UICard from "./UICard";
 import UIImage from "./UIImage";
 
@@ -24,7 +24,7 @@ export type ModalProps = {
 // Modal element
 export function UIModal({ isShown, children, onClose }: ModalProps) {
   const dispatch = useDispatch();
-  const store = useStore<SLState>();
+  const store = useStore<RTState>();
   const [id, setId] = useState<number>(-1);
   useEffect(() => {
     const nextId = store.getState().modalState.nextID;
@@ -62,7 +62,7 @@ export function UIModal({ isShown, children, onClose }: ModalProps) {
 // Modal List shown from the root
 export function GlobalUIModal() {
   const modalList = useSelector(
-    (state: SLState) => state.modalState.modalList
+    (state: RTState) => state.modalState.modalList
   );
   const modalListJSX = modalList.map((modal) => {
     const { id, isShown, children, onClose } = modal;
@@ -76,7 +76,7 @@ export function GlobalUIModal() {
           <>
             <div className="modal-close-button">
               <UIImage
-                src={SLIconSource.CloseIcon}
+                src={RTIconSource.CloseIcon}
                 color="dark-blue"
                 onClick={() => {
                   onClose();

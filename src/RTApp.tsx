@@ -5,7 +5,7 @@ import { GlobalUIModal } from './ui/UIModal'
 import Placeholder from './pages/Placeholder'
 import { UIToastList } from './ui/UIToast'
 
-function SLApp() {
+function RTApp() {
   return (
     <Router>
       <GlobalUIModal />
@@ -22,4 +22,4 @@ function SLApp() {
   )
 }
 
-export default SLApp
+export default RTApp

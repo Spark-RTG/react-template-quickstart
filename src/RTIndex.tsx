@@ -1,14 +1,14 @@
-import './sl_index.scss'
+import './rt_index.scss'
 
-import App from './SLApp'
+import App from './RTApp'
 import { Provider } from 'react-redux'
-import { SLStateStore } from './SLReduxStore'
+import { RTStateStore } from './RTReduxStore'
 import { createRoot } from 'react-dom/client'
 
 const root = document.getElementById('root')!
 
 createRoot(root).render(
-  <Provider store={SLStateStore}>
+  <Provider store={RTStateStore}>
     <App />
   </Provider>
 )

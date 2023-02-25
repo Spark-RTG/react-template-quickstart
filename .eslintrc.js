@@ -217,7 +217,7 @@ module.exports = {
           camelCase: true,
           pascalCase: true,
         },
-        ignore: [/UI.+/, /SL.+/],
+        ignore: [/UI.+/, /RT.+/],
       },
     ],
     'unicorn/no-keyword-prefix': 'off',

@@ -2,8 +2,8 @@ import { privateRemoveToast, privatetoast } from "./state_slices/toastState";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import SLIconSource from "../assets/SLIconSource";
-import { SLState } from "../SLReduxStore";
+import RTIconSource from "../assets/RTIconSource";
+import { RTState } from "../RTReduxStore";
 import UIImage from "./UIImage";
 
 export type ToastPropsWithID = { id: number } & ToastProps;
@@ -60,16 +60,16 @@ function UIToast({
   switch (type) {
     case true:
     case "success":
-      icon = <UIImage src={SLIconSource.CheckCircleIcon} color="green" />;
+      icon = <UIImage src={RTIconSource.CheckCircleIcon} color="green" />;
       if (!disappear && !buttonText) disappear = 3000;
 
       break;
     case false:
     case "error":
-      icon = <UIImage src={SLIconSource.AlertIcon} color="red" />;
+      icon = <UIImage src={RTIconSource.AlertIcon} color="red" />;
       break;
     case "info":
-      icon = <UIImage src={SLIconSource.InfoIcon} color="blue" />;
+      icon = <UIImage src={RTIconSource.InfoIcon} color="blue" />;
       if (!disappear && !buttonText) disappear = 3000;
 
       break;
@@ -121,7 +121,7 @@ function UIToast({
             deleteCurrent();
           }}
         >
-          <UIImage src={SLIconSource.CloseIcon} color="grey" />
+          <UIImage src={RTIconSource.CloseIcon} color="grey" />
         </div>
       </div>
     </div>
@@ -130,7 +130,7 @@ function UIToast({
 
 export function UIToastList() {
   const toastList = useSelector(
-    (state: SLState) => state.toastState.toastList
+    (state: RTState) => state.toastState.toastList
   );
   const toastListJSX = toastList.map((toast) => (
     <UIToast

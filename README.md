@@ -120,7 +120,7 @@ Note: if the rules above conflict each other, former ones have higher priority.
 Additional rules applicable for files and modules/classes:
 
 - **Scope Clear** (use `DashboardMenu` instead of `Menu` when you are editing a component that is only used in the Dashboard scope)
-- **Special Prefix** (use `SL` as prefix when you are editing a file that should be globally available, this should be uncommon except for the files in the root _./src_ folder)
+- **Special Prefix** (use `RT` (or your own abbreviation of the project name) as prefix when you are editing a file that should be globally available, this should be uncommon except for the files in the root _./src_ folder)
 - **No Redundant Postfix** (use `ProfileForm` instead of `ProfileFormFragment` when you are creating a file/module under a descriptive folder like "fragments", you don't need to further add postfix to the file.)
 
 ## Putting Files In Correct Places

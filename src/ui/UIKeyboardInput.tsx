@@ -7,7 +7,7 @@ import React, {
 } from "react";
 
 import { CacheContext } from "./utils/GlobalCache";
-import SLIconSource from "../assets/SLIconSource";
+import RTIconSource from "../assets/RTIconSource";
 import UIFlexBox from "./UIFlexbox";
 import { UIFormContext } from "./UIForm";
 import UIImage from "./UIImage";
@@ -192,7 +192,7 @@ function UIKeyboardInput({
                 message={privateErrorMessage}
                 style={{ display: "flex" }}
               >
-                <UIImage src={SLIconSource.AlertIcon} color="red" />
+                <UIImage src={RTIconSource.AlertIcon} color="red" />
               </UIToolTip>
             </UIFlexBox>
           </div>
