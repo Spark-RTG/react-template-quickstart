@@ -193,4 +193,4 @@ If you are creating a brand new category of features (e.g. new user registration
 
 Put the settings file to the most granular file directory that still contains the entire effective scope of this file.
 
-> @copyright This project framework was written by [Yukun Song](https://github.com/Spark-RTG) on Feb, 2023. Feel free to use this template for any future projects.
+> @copyright This project framework was written by [Yukun Song](https://github.com/Spark-RTG) in Feb, 2023. Feel free to use this template for any future projects.
