@@ -1,0 +1,36 @@
+.ui-image {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  max-height: 100%;
+  &.square {
+    border-radius: min(5%, 10px);
+  }
+  &.round {
+    border-radius: 50%;
+  }
+  &.dark-blue {
+    filter: invert(11%) sepia(84%) saturate(4970%) hue-rotate(221deg)
+      brightness(60%) contrast(101%);
+  }
+  &.orange {
+    filter: invert(72%) sepia(75%) saturate(376%) hue-rotate(349deg)
+      brightness(99%) contrast(88%);
+  }
+  &.red {
+    filter: invert(30%) sepia(43%) saturate(6144%) hue-rotate(344deg)
+      brightness(107%) contrast(92%);
+  }
+  &.green {
+    filter: invert(61%) sepia(78%) saturate(1576%) hue-rotate(97deg)
+      brightness(93%) contrast(92%);
+  }
+  &.blue {
+    filter: invert(40%) sepia(97%) saturate(2711%) hue-rotate(186deg)
+      brightness(97%) contrast(103%);
+  }
+  &.grey {
+    filter: invert(85%) sepia(0%) saturate(349%) hue-rotate(203deg)
+      brightness(83%) contrast(72%);
+  }
+}
