@@ -1,18 +1,18 @@
-import React from "react";
-import UIFlexBox from "./UIFlexbox";
+import React from 'react'
 
-type Props = {
+export type UICardProps = {
   children?: JSX.Element[] | JSX.Element;
   className?: string;
   style?: React.CSSProperties;
+  onClick?: () => void;
 };
 
-function UICard({ children, style, className }: Props) {
+function UICard({ children, style, className, onClick}: UICardProps) {
   return (
-    <div className={"ui-card " + (className ?? "")} style={style}>
+    <div className={'ui-card ' + (className ?? '')} style={style} onClick={onClick}>
       {children}
     </div>
-  );
+  )
 }
 
-export default UICard;
+export default UICard

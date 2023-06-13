@@ -6,6 +6,7 @@ import LogUtil from '../utils/LogUtil'
 import RTIconSource from '../assets/RTIconSource'
 import UIButton from './UIButton'
 import UICard from './UICard'
+import UICardGroup from './UICardGroup'
 import UIFileUploader from './UIFileUploader'
 import UIFlexBox from './UIFlexbox'
 import UIGrid from './UIGrid'
@@ -15,6 +16,7 @@ import UILink from './UILink'
 import { UIModal } from './UIModal'
 import { UIRadio } from './UIRadio'
 import UIRadioGroup from './UIRadioGroup'
+import UITag from './UITag'
 import UIText from './UIText'
 import { useToast } from './UIToast'
 
@@ -22,8 +24,7 @@ function convertToHTMLOptions(options: UISelectOptionContent[]) {
   return options.map(item => (
     <option
       key={item.label}
-      value={item.value}
-    >
+      value={item.value}>
       {item.label}
     </option>))
 }
@@ -270,7 +271,7 @@ function Demo() {
           text='info'
           onClick={() => {
             toast(
-              "This is an info toast message!",
+              'This is an info toast message!',
               'info',
               2000,
               'OK'
@@ -286,7 +287,7 @@ function Demo() {
       </UIFlexBox>
 
       <UILineSeparator direction='horizontal' />
-
+      <UIText>This is the demo for UIModal</UIText>
       <UIFlexBox>
         <UIButton
           margin={4}
@@ -331,6 +332,30 @@ function Demo() {
             </UIModal>
           </UIFlexBox>
         </UIModal>
+      </UIFlexBox>
+      <UILineSeparator direction='horizontal' />
+      <UIText>This is the demo for UICardGroup</UIText>
+      <UICardGroup>
+        <UICard style={{width: "100px", height: "200px"}}>
+          <UIText>1</UIText>
+        </UICard>
+        <UICardGroup direction='column'>
+        <UICard style={{width: "100px", height: "100px"}}>
+          <UIText>2</UIText>
+        </UICard>
+        <UICard style={{width: "100px", height: "100px"}}>
+          <UIText>3</UIText>
+        </UICard>
+        </UICardGroup>
+      </UICardGroup>
+      <UILineSeparator direction='horizontal' />
+      <UIText>This is the demo for UITag</UIText>
+      <UIFlexBox>
+        <UITag text='DEFAULT'/>
+        <UITag text='DANGER' color='red'/>
+        <UITag text='WARNING' color='orange' />
+        <UITag text='SAFE' color='green'/>
+        <UITag text='STABLE' color='blue'/>
       </UIFlexBox>
     </UIFlexBox>
   )

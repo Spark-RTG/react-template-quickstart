@@ -1,48 +1,48 @@
-import { privateRemoveToast, privatetoast } from "./state_slices/toastState";
-import { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { privateRemoveToast, privatetoast } from './state_slices/toastState'
+import { useCallback, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import RTIconSource from "../assets/RTIconSource";
-import { RTState } from "../RTReduxStore";
-import UIImage from "./UIImage";
+import RTIconSource from '../assets/RTIconSource'
+import { RTState } from '../RTReduxStore'
+import UIImage from './UIImage'
 
 export type ToastPropsWithID = { id: number } & ToastProps;
 
 export type ToastProps = {
   message: string;
-  type: "success" | "error" | "info" | boolean;
+  type: 'success' | 'error' | 'info' | boolean;
   disappear?: number | null;
   buttonText?: string | null;
   buttonFunction?: (() => void) | null;
 };
 
 export function useToast() {
-  const dispatch = useDispatch();
-  const [currentToast, setCurrentToast] = useState<ToastProps[]>([]);
+  const dispatch = useDispatch()
+  const [currentToast, setCurrentToast] = useState<ToastProps[]>([])
   useEffect(() => {
-    if (currentToast.length === 0) return;
+    if (currentToast.length === 0) return
     currentToast.forEach((toastProps: ToastProps) => {
-      const { message, type, disappear, buttonText, buttonFunction } = toastProps;
+      const { message, type, disappear, buttonText, buttonFunction } = toastProps
       dispatch(
         privatetoast({
+          buttonFunction,
+          buttonText,
+          disappear,
           message,
           type,
-          disappear,
-          buttonText,
-          buttonFunction,
         })
-      );
+      )
     })
-    setCurrentToast([]);
-  }, [currentToast.length]);
+    setCurrentToast([])
+  }, [currentToast.length])
   return (
-    message: ToastProps["message"],
-    type: ToastProps["type"],
-    disappear?: ToastProps["disappear"],
-    buttonText?: ToastProps["buttonText"],
-    buttonFunction?: ToastProps["buttonFunction"]
+    message: ToastProps['message'],
+    type: ToastProps['type'],
+    disappear?: ToastProps['disappear'],
+    buttonText?: ToastProps['buttonText'],
+    buttonFunction?: ToastProps['buttonFunction']
   ) => {
-    setCurrentToast(currToastList => [...currToastList, { message, type, disappear, buttonText, buttonFunction }])
+    setCurrentToast(currToastList => [...currToastList, { buttonFunction, buttonText, disappear, message, type }])
   }
 }
 
@@ -54,85 +54,81 @@ function UIToast({
   buttonText,
   buttonFunction,
 }: ToastPropsWithID) {
-  const [isDeleting, setIsDeleting] = useState(false);
-  const dispatch = useDispatch();
-  let icon: JSX.Element | null = null;
+  const [isDeleting, setIsDeleting] = useState(false)
+  const dispatch = useDispatch()
+  let icon: JSX.Element | null = null
   switch (type) {
     case true:
-    case "success":
-      icon = <UIImage src={RTIconSource.CheckCircleIcon} color="green" />;
-      if (!disappear && !buttonText) disappear = 3000;
+    case 'success':
+      icon = <UIImage src={RTIconSource.CheckCircleIcon} color='green' />
+      if (!disappear && !buttonText) disappear = 3000
 
-      break;
+      break
     case false:
-    case "error":
-      icon = <UIImage src={RTIconSource.AlertIcon} color="red" />;
-      break;
-    case "info":
-      icon = <UIImage src={RTIconSource.InfoIcon} color="blue" />;
-      if (!disappear && !buttonText) disappear = 3000;
+    case 'error':
+      icon = <UIImage src={RTIconSource.AlertIcon} color='red' />
+      break
+    case 'info':
+      icon = <UIImage src={RTIconSource.InfoIcon} color='blue' />
+      if (!disappear && !buttonText) disappear = 3000
 
-      break;
+      break
   }
   const onDelete = useCallback(() => {
-    dispatch(privateRemoveToast({ id }));
-  }, [id]);
+    dispatch(privateRemoveToast({ id }))
+  }, [id])
 
   const deleteCurrent = useCallback(() => {
-    setIsDeleting(true);
-    setTimeout(onDelete, 500);
-  }, [onDelete]);
+    setIsDeleting(true)
+    setTimeout(onDelete, 500)
+  }, [onDelete])
 
   useEffect(() => {
     if (disappear) {
-      const timeOut = setTimeout(deleteCurrent, disappear);
+      const timeOut = setTimeout(deleteCurrent, disappear)
       return () => {
-        clearTimeout(timeOut);
-      };
+        clearTimeout(timeOut)
+      }
     }
-  }, [disappear, deleteCurrent]);
+  }, [disappear, deleteCurrent])
 
   return (
     <div
       className={`ui-toast-wrapper${
-        isDeleting ? " ui-toast-wrapper-collapse" : ""
-      }`}
-    >
-      <div className="ui-toast">
-        <div className="ui-toast-icon">{icon}</div>
-
-        <div className="ui-toast-message">{message}</div>
+        isDeleting ? ' ui-toast-wrapper-collapse' : ''
+      }`}>
+      <div className='ui-toast'>
+        <div className='ui-toast-icon'>{icon}</div>
+        <div className='ui-toast-message'>{message}</div>
 
         {buttonText ? (
           <div
-            className="ui-toast-button"
+            className='ui-toast-button'
             onClick={() => {
-              buttonFunction?.();
-              deleteCurrent();
-            }}
-          >
+              buttonFunction?.()
+              deleteCurrent()
+            }}>
             {buttonText}
           </div>
         ) : null}
 
         <div
-          className="ui-toast-close"
+          className='ui-toast-close'
           onClick={() => {
-            deleteCurrent();
-          }}
-        >
-          <UIImage src={RTIconSource.CloseIcon} color="grey" />
+            deleteCurrent()
+          }}>
+          <UIImage src={RTIconSource.CloseIcon} color='grey' />
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export function UIToastList() {
   const toastList = useSelector(
     (state: RTState) => state.toastState.toastList
-  );
-  const toastListJSX = toastList.map((toast) => (
+  )
+  const toastListJSX = toastList.map(toast => (
     <UIToast
       key={toast.id}
       id={toast.id}
@@ -140,8 +136,7 @@ export function UIToastList() {
       type={toast.type}
       disappear={toast.disappear}
       buttonText={toast.buttonText}
-      buttonFunction={toast.buttonFunction}
-    />
-  ));
-  return <div className="ui-toast-list">{toastListJSX}</div>;
+      buttonFunction={toast.buttonFunction}/>
+  ))
+  return <div className='ui-toast-list'>{toastListJSX}</div>
 }

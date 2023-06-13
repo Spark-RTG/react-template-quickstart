@@ -4,17 +4,17 @@ import {
   useContext,
   useEffect,
   useState,
-} from "react";
+} from 'react'
 
-import { CacheContext } from "./utils/GlobalCache";
-import LogUtil from "../utils/LogUtil";
-import RTIconSource from "../assets/RTIconSource";
-import UIFlexBox from "./UIFlexbox";
-import { UIFormContext } from "./UIForm";
-import UIImage from "./UIImage";
-import UIText from "./UIText";
-import { UIToolTip } from "./UIToolTip";
-import { useDispatch } from "react-redux";
+import { CacheContext } from './utils/GlobalCache'
+import LogUtil from '../utils/LogUtil'
+import RTIconSource from '../assets/RTIconSource'
+import UIFlexBox from './UIFlexbox'
+import { UIFormContext } from './UIForm'
+import UIImage from './UIImage'
+import UIText from './UIText'
+import { UIToolTip } from './UIToolTip'
+import { useDispatch } from 'react-redux'
 
 export type UIRadioGroupConfig = {
   name: string;
@@ -22,9 +22,9 @@ export type UIRadioGroupConfig = {
   isRequired?: boolean;
   onChange?: (value: any) => void;
   isMulti?: boolean;
-  direction?: "row" | "column";
-  variant?: "primary" | "secondary";
-  grow?: React.CSSProperties["flexGrow"];
+  direction?: 'row' | 'column';
+  variant?: 'primary' | 'secondary';
+  grow?: React.CSSProperties['flexGrow'];
   errorMessage?: string;
   value?: any;
   gap?: 0 | 4 | 8 | 12 | 16;
@@ -38,7 +38,7 @@ type IUIRadioGroupContext = {
   setRadioGroupValue: (value: any) => void;
 };
 
-export const UIRadioGroupContext = createContext({} as IUIRadioGroupContext);
+export const UIRadioGroupContext = createContext({} as IUIRadioGroupContext)
 
 function UIRadioGroup({
   name,
@@ -51,68 +51,68 @@ function UIRadioGroup({
   direction,
   errorMessage,
   value,
-  variant = "primary",
+  variant = 'primary',
   isMulti = false,
   isRequired = false,
 }: Props) {
   const [privateValue, setPrivateValue] = useState<any | any[]>(
     isMulti ? [] : null
-  );
-  const [dirty, setDirty] = useState(false);
-  const dispatch = useDispatch();
-  const formContext = useContext(UIFormContext);
-  const cacheContext = useContext(CacheContext);
+  )
+  const [dirty, setDirty] = useState(false)
+  const dispatch = useDispatch()
+  const formContext = useContext(UIFormContext)
+  const cacheContext = useContext(CacheContext)
   useEffect(() => {
-    setPrivateValue(isMulti ? [] : null);
-  }, [isMulti]);
+    setPrivateValue(isMulti ? [] : null)
+  }, [isMulti])
 
   useEffect(() => {
-    setPrivateValue(value ?? (isMulti ? [] : null));
-    formOnChange(name, value);
+    setPrivateValue(value ?? (isMulti ? [] : null))
+    formOnChange(name, value)
     if (formContext) {
-      const { requiredItems, setRequiredItems } = formContext;
+      const { requiredItems, setRequiredItems } = formContext
       if (isRequired && !requiredItems.includes(name)) {
-        requiredItems.push(name);
-        setRequiredItems(requiredItems);
+        requiredItems.push(name)
+        setRequiredItems(requiredItems)
       }
     }
-  }, [name, value]);
+  }, [name, value])
   const formOnChange = useCallback(
     (name: string, value: any) => {
       if (formContext) {
-        const { payload, setPayload } = formContext;
-        payload[name] = value;
-        setPayload(payload);
+        const { payload, setPayload } = formContext
+        payload[name] = value
+        setPayload(payload)
       }
     },
     [formContext]
-  );
+  )
   const cacheOnChange = useCallback(
     (name: string, value: any) => {
       if (cacheContext) {
-        const { setItem } = cacheContext;
-        dispatch(setItem({ name, value }));
+        const { setItem } = cacheContext
+        dispatch(setItem({ name, value }))
       }
     },
     [cacheContext]
-  );
+  )
   const privateOnChange = useCallback(
     (value: any) => {
-      let currentValue = privateValue;
+      let currentValue = privateValue
       if (isMulti) {
-        currentValue = [...privateValue];
-        if (!currentValue.includes(value)) currentValue.push(value);
-        else currentValue.splice(currentValue.indexOf(value), 1);
-      } else currentValue = currentValue === value ? null : value;
+        currentValue = [...privateValue]
+        if (!currentValue.includes(value)) currentValue.push(value)
+        else currentValue.splice(currentValue.indexOf(value), 1)
+      } else currentValue = currentValue === value ? null : value
 
-      setPrivateValue(currentValue);
-      setDirty(true);
-      cacheOnChange(name, currentValue);
-      formOnChange(name, currentValue);
-      onChange?.(currentValue);
+      setPrivateValue(currentValue)
+      setDirty(true)
+      cacheOnChange(name, currentValue)
+      formOnChange(name, currentValue)
+      onChange?.(currentValue)
     },
     [cacheOnChange, formOnChange, onChange, privateValue, name]
-  );
+  )
 
   const privateErrorMessage =
     errorMessage ||
@@ -120,20 +120,19 @@ function UIRadioGroup({
       (privateValue === null ||
         (Array.isArray(privateValue) && privateValue.length === 0)) &&
       (dirty || formContext?.isSubmitAttempted))
-      ? "This field is required."
-      : "";
+      ? 'This field is required.'
+      : ''
 
   return (
     <UIFlexBox
-      direction="column"
-      style={{ flexGrow: grow, transition: "all linear 0.5s" }}
-    >
-      <UIFlexBox style={{ width: "100%", marginBottom: "4px" }}>
+      direction='column'
+      style={{ flexGrow: grow, transition: 'all linear 0.5s' }}>
+      <UIFlexBox style={{ marginBottom: '4px', width: '100%' }}>
         <UIText bold size={16}>
           {label}
 
           {label && isRequired ? (
-            <span className="ui-input-red-star" style={{ marginLeft: "4px" }}>
+            <span className='ui-input-red-star' style={{ marginLeft: '4px' }}>
               *
             </span>
           ) : null}
@@ -144,41 +143,36 @@ function UIRadioGroup({
         value={{
           radioGroupValue: privateValue,
           setRadioGroupValue: privateOnChange,
-        }}
-      >
-        <div className="ui-radio-group-wrapper">
+        }}>
+        <div className='ui-radio-group-wrapper'>
           <div
             className={`ui-radio-group ${variant}`}
-            style={{ flexDirection: direction, fontSize, gap }}
-          >
+            style={{ flexDirection: direction, fontSize, gap }}>
             {children}
           </div>
 
           <div
             className={`ui-radio-group-error ${
-              privateErrorMessage ? "shown" : ""
-            }`}
-          >
+              privateErrorMessage ? 'shown' : ''
+            }`}>
             <UIFlexBox
               style={{
-                height: "100%",
-                width: "26px",
-                padding: "4px",
-                boxSizing: "border-box",
-                alignItems: "center",
-              }}
-            >
+                alignItems: 'center',
+                boxSizing: 'border-box',
+                height: '100%',
+                padding: '4px',
+                width: '26px',
+              }}>
               <UIToolTip
                 message={privateErrorMessage}
-                style={{ display: "flex" }}
-              >
-                <UIImage src={RTIconSource.AlertIcon} color="red" />
+                style={{ display: 'flex' }}>
+                <UIImage src={RTIconSource.AlertIcon} color='red' />
               </UIToolTip>
             </UIFlexBox>
           </div>
         </div>
       </UIRadioGroupContext.Provider>
     </UIFlexBox>
-  );
+  )
 }
-export default UIRadioGroup;
+export default UIRadioGroup

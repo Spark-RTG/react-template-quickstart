@@ -150,20 +150,17 @@ function UIKeyboardSelect({
   return (
     <UIFlexBox
       direction='column'
-      style={{ flexGrow: grow }}
-    >
-      <UIFlexBox style={{ width: '100%', marginBottom: '4px' }}>
+      style={{ flexGrow: grow }}>
+      <UIFlexBox style={{ marginBottom: '4px', width: '100%' }}>
         <UIText
           bold
-          size={16}
-        >
+          size={16}>
           {label}
 
           {label && isRequired ? (
             <span
               className='ui-input-red-star'
-              style={{ marginLeft: '4px' }}
-            >
+              style={{ marginLeft: '4px' }}>
               *
             </span>
           ) : null}
@@ -177,31 +174,26 @@ function UIKeyboardSelect({
           multiple={isMulti}
           data-placeholder={placeholder}
           value={privateValue}
-          onChange={() => {}}
-        >
+          onChange={() => {}}>
           {options}
         </select>
 
         <div
-          className={`ui-select-error ${privateErrorMessage ? 'shown' : ''}`}
-        >
+          className={`ui-select-error ${privateErrorMessage ? 'shown' : ''}`}>
           <UIFlexBox
             style={{
-              height: '100%',
-              width: '26px',
-              padding: '4px',
-              boxSizing: 'border-box',
               alignItems: 'center',
-            }}
-          >
+              boxSizing: 'border-box',
+              height: '100%',
+              padding: '4px',
+              width: '26px',
+            }}>
             <UIToolTip
               message={privateErrorMessage}
-              style={{ display: 'flex' }}
-            >
+              style={{ display: 'flex' }}>
               <UIImage
                 src={RTIconSource.AlertIcon}
-                color='red'
-              />
+                color='red'/>
             </UIToolTip>
           </UIFlexBox>
         </div>

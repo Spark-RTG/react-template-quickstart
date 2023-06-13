@@ -1,5 +1,5 @@
-import React from "react";
-import { UIToolTip } from "./UIToolTip";
+import React from 'react'
+import { UIToolTip } from './UIToolTip'
 
 type Props = {
   autoFocus?: boolean;
@@ -9,9 +9,9 @@ type Props = {
   form?: string;
   name?: string;
   text: string;
-  type?: "submit" | "reset";
-  variant?: "primary" | "secondary";
-  grow?: React.CSSProperties["flexGrow"];
+  type?: 'submit' | 'reset';
+  variant?: 'primary' | 'secondary';
+  grow?: React.CSSProperties['flexGrow'];
   dot?: boolean;
   margin?: 0 | 4 | 8 | 12 | 16;
   fontSize?: 16 | 18 | 20 | 22 | 24;
@@ -38,30 +38,27 @@ function UIButton({
     <UIToolTip
       message={disabled ? disabledMessage : null}
       style={{
-        display: "flex",
+        display: 'flex',
         flexGrow: grow,
-        transition: "all linear 0.2s",
-      }}
-    >
+        transition: 'all linear 0.2s',
+      }}>
       <button
-        className={
-          "ui-button " + (variant ?? "primary") + (dot ? " red-dot" : "")
-        }
+        type='button'
+        className={'ui-button ' + (variant ?? 'primary') + (dot ? ' red-dot' : '')}
         autoFocus={autoFocus}
         disabled={disabled}
         name={name}
         form={form}
         onClick={() => {
-          if (!disabled) {
-            onClick?.();
-          }
+          if (!disabled)
+            onClick?.()
+
         }}
-        style={{ margin, fontSize }}
-      >
+        style={{ fontSize, margin }}>
         {text}
       </button>
     </UIToolTip>
-  );
+  )
 }
 
-export default UIButton;
+export default UIButton
